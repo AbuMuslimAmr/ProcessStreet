@@ -1,3 +1,7 @@
-/**
- * Created by abumuslim on 11/9/15.
- */
+(function() {
+  'use strict';
+
+  angular
+    .module('WistiaApp')
+    .constant('DEFAULT_STATE', '/upload');
+})();

@@ -1,3 +1,8 @@
-/**
- * Created by abumuslim on 11/9/15.
- */
+(function() {
+  'use strict';
+
+  angular
+    .module('WistiaApp', [
+      'ui.router'
+    ]);
+})();

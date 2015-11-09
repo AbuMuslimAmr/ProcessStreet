@@ -17,6 +17,8 @@
   ],
   "dependencies": {
     "angular": "~1.4.7",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "ui-router": "~0.2.15",
+    "bootstrap": "~3.3.5"
   }
 }
