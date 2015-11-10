@@ -3,6 +3,7 @@
 
   angular
     .module('WistiaApp', [
-      'ui.router'
+      'ui.router',
+      'blueimp.fileupload'
     ]);
 })();

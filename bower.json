@@ -19,6 +19,8 @@
     "angular": "~1.4.7",
     "jquery": "~2.1.4",
     "ui-router": "~0.2.15",
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "blueimp-file-upload": "https://github.com/blueimp/jQuery-File-Upload.git#~9.11.2",
+    "jquery-ui": "~1.11.4"
   }
 }
