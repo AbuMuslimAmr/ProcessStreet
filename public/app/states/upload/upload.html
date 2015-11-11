@@ -1,78 +1,68 @@
 <div ng-controller="UploadCtrl">
-  <form id="fileupload" action="https://upload.wistia.com/" method="POST" enctype="multipart/form-data" data-file-upload="fileUploadOptions" data-ng-class="{'fileupload-processing': processing()}">
-    <input type="hidden" name="api_password" value="5f4ad4c906859770085fc09a0967971f28095f18beaf89b8fef9bfd1267d8969">
-    <div class="row fileupload-buttonbar">
-      <div class="col-lg-7">
-        <!-- Add files btn -->
-        <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}">
-          <i class="glyphicon glyphicon-plus"></i>
-          <span>Add files...</span>
-          <input type="file" name="files[]" multiple ng-disabled="disabled">
-        </span>
 
-        <!-- Start btn -->
-        <button type="button" class="btn btn-primary start" data-ng-click="submit()">
-          <i class="glyphicon glyphicon-upload"></i>
-          <span>Start upload</span>
-        </button>
-
-        <!-- Cancel btn -->
-        <button type="button" class="btn btn-warning cancel" data-ng-click="cancel()">
-          <i class="glyphicon glyphicon-ban-circle"></i>
-          <span>Cancel upload</span>
-        </button>
-
-        <!-- The global file processing state -->
-        <span class="fileupload-process"></span>
-      </div>
-
-      <!-- The global progress state -->
-      <div class="col-lg-5 fade" data-ng-class="{in: active()}">
-        <!-- The global progress bar -->
-        <div class="progress progress-striped active" data-file-upload-progress="progress()"><div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div></div>
-        <!-- The extended global progress state -->
-        <div class="progress-extended">&nbsp;</div>
-      </div>
+  <form name="form" enctype="multipart/form-data">
+    <div class="btn btn-default" ngf-select ng-model="file" name="file" ngf-pattern="'video/*'"
+         accept="video/*" ngf-max-size="20MB" ngf-min-height="100">Select
     </div>
 
-    <!--&lt;!&ndash; The table listing the files available for upload/download &ndash;&gt;-->
-    <!--<table class="table table-striped files ng-cloak">-->
-      <!--<tr data-ng-repeat="file in queue" data-ng-class="{'processing': file.$processing()}">-->
-        <!--<td data-ng-switch data-on="!!file.thumbnailUrl">-->
-          <!--<div class="preview" data-ng-switch-when="true">-->
-            <!--<a data-ng-href="{{file.url}}" title="{{file.name}}" download="{{file.name}}" data-gallery><img data-ng-src="{{file.thumbnailUrl}}" alt=""></a>-->
-          <!--</div>-->
-          <!--<div class="preview" data-ng-switch-default data-file-upload-preview="file"></div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<p class="name" data-ng-switch data-on="!!file.url">-->
-                        <!--<span data-ng-switch-when="true" data-ng-switch data-on="!!file.thumbnailUrl">-->
-                            <!--<a data-ng-switch-when="true" data-ng-href="{{file.url}}" title="{{file.name}}" download="{{file.name}}" data-gallery>{{file.name}}</a>-->
-                            <!--<a data-ng-switch-default data-ng-href="{{file.url}}" title="{{file.name}}" download="{{file.name}}">{{file.name}}</a>-->
-                        <!--</span>-->
-            <!--<span data-ng-switch-default>{{file.name}}</span>-->
-          <!--</p>-->
-          <!--<strong data-ng-show="file.error" class="error text-danger">{{file.error}}</strong>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<p class="size">{{file.size | formatFileSize}}</p>-->
-          <!--<div class="progress progress-striped active fade" data-ng-class="{pending: 'in'}[file.$state()]" data-file-upload-progress="file.$progress()"><div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div></div>-->
-        <!--</td>-->
-        <!--<td>-->
-          <!--<button type="button" class="btn btn-primary start" data-ng-click="file.$submit()" data-ng-hide="!file.$submit || options.autoUpload" data-ng-disabled="file.$state() == 'pending' || file.$state() == 'rejected'">-->
-            <!--<i class="glyphicon glyphicon-upload"></i>-->
-            <!--<span>Start</span>-->
-          <!--</button>-->
-          <!--<button type="button" class="btn btn-warning cancel" data-ng-click="file.$cancel()" data-ng-hide="!file.$cancel">-->
-            <!--<i class="glyphicon glyphicon-ban-circle"></i>-->
-            <!--<span>Cancel</span>-->
-          <!--</button>-->
-          <!--<button data-ng-controller="FileDestroyController" type="button" class="btn btn-danger destroy" data-ng-click="file.$destroy()" data-ng-hide="!file.$destroy">-->
-            <!--<i class="glyphicon glyphicon-trash"></i>-->
-            <!--<span>Delete</span>-->
-          <!--</button>-->
-        <!--</td>-->
-      <!--</tr>-->
-    <!--</table>-->
+    <button class="btn btn-success" type="submit" ng-click="upload()" ng-disabled="!file || !form.file.$valid">
+      Upload <strong>{{file.name}}</strong>
+    </button>
   </form>
+
+  <!--<form id="fileupload" action="https://upload.wistia.com/" method="POST" enctype="multipart/form-data" data-file-upload="fileUploadOptions" data-ng-class="{'fileupload-processing': processing()}">-->
+
+    <!--&lt;!&ndash; Wistia auth and config &ndash;&gt;-->
+    <!--<input type="hidden" name="api_password" value="5f4ad4c906859770085fc09a0967971f28095f18beaf89b8fef9bfd1267d8969" />-->
+    <!--<input type="hidden" name="project_id" value="6m0qim6o9j" />-->
+
+    <!--&lt;!&ndash; Upload buttons &ndash;&gt;-->
+    <!--<div class="row fileupload-buttonbar">-->
+      <!--<div class="col-lg-7">-->
+        <!--&lt;!&ndash; Add files btn &ndash;&gt;-->
+        <!--<span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}">-->
+          <!--<i class="glyphicon glyphicon-plus"></i>-->
+          <!--<span>Add files...</span>-->
+          <!--<input type="file" name="files[]" multiple ng-disabled="disabled" ng-file-select="onFileSelect($files)" />-->
+        <!--</span>-->
+
+        <!--&lt;!&ndash; Start btn &ndash;&gt;-->
+        <!--<button type="button" class="btn btn-primary start" data-ng-click="submit()">-->
+          <!--<i class="glyphicon glyphicon-upload"></i>-->
+          <!--<span>Start upload</span>-->
+        <!--</button>-->
+      <!--</div>-->
+
+      <!--&lt;!&ndash; The global progress state &ndash;&gt;-->
+      <!--<div class="col-lg-5 fade" data-ng-class="{in: active()}">-->
+        <!--&lt;!&ndash; The global progress bar &ndash;&gt;-->
+        <!--<div class="progress progress-striped active" data-file-upload-progress="progress()">-->
+          <!--<div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; The extended global progress state &ndash;&gt;-->
+        <!--<div class="progress-extended">&nbsp;</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</form>-->
+  <table>
+    <tbody>
+      <tr ng-repeat="media in project.medias" ng-show="media.type === 'Video'">
+        <td>{{media.name}}</td>
+        <td>{{media.status}}</td>
+        <td>
+          <img ng-src="{{media.thumbnail.url}}" alt="{{media.name}}" />
+        </td>
+      </tr>
+      <tr ng-show="project === undefined">
+        <td>
+          Loading ...
+        </td>
+      </tr>
+      <tr ng-show="project !== undefined && project.medias.length === 0">
+        <td>
+          No videos uploaded yet!
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

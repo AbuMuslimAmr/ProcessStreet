@@ -4,6 +4,7 @@
   angular
     .module('WistiaApp', [
       'ui.router',
-      'blueimp.fileupload'
+      'restangular',
+      'ngFileUpload'
     ]);
 })();
