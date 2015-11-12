@@ -4,6 +4,9 @@
   angular
     .module('WistiaApp')
     .controller('UploadCtrl', function($scope, api, Upload, WISTIA_URL, WISTIA_PROJ_ID, WISTIA_API_PASSWORD) {
+      $scope.isUploading = false;
+      $scope.uploadSuccess = null;
+
       function load() {
         api
           .getProject()
@@ -13,6 +16,10 @@
       }
 
       $scope.upload = function() {
+        $scope.isUploading = true;
+        $scope.progress = 0;
+        $scope.uploadSuccess = null;
+
         Upload.upload({
           url: WISTIA_URL,
           data: {
@@ -21,12 +28,14 @@
             api_password: WISTIA_API_PASSWORD
           }
         }).then(function (response) {
-          console.log('Success ' + response.config.data.file.name + 'uploaded. Response: ' + response.data);
-        }, function (response) {
-          console.log('Error status: ' + response.status);
-        }, function (evt) {
-          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-          console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+          $scope.project.medias.unshift(response.data);
+          $scope.uploadSuccess = true;
+        }, function () {
+          $scope.uploadSuccess = false;
+        }, function (event) {
+          $scope.progress = parseInt(100.0 * event.loaded / event.total);
+        })['finally'](function() {
+          $scope.isUploading = false;
         });
       };
 

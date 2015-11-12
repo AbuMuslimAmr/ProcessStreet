@@ -1,68 +1,52 @@
-<div ng-controller="UploadCtrl">
+<div class="container-fluid" ng-controller="UploadCtrl">
 
-  <form name="form" enctype="multipart/form-data">
-    <div class="btn btn-default" ngf-select ng-model="file" name="file" ngf-pattern="'video/*'"
-         accept="video/*" ngf-max-size="20MB" ngf-min-height="100">Select
+  <div class="row">
+    <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12 col-lg-offset-3 col-md-offset-2 col-sm-offset-1">
+      <div class="panel panel-default upload">
+
+        <form name="form" enctype="multipart/form-data">
+          <div ng-model="file" name="file"
+               ngf-select ngf-pattern="'video/*'"
+               class="btn btn-default btn-lg"
+               accept="video/*">
+            Select
+          </div>
+
+          <button class="btn btn-primary btn-lg" type="submit" ng-click="upload()" ng-disabled="!file || !form.file.$valid || project === undefined">
+            Upload <strong>{{ file.name }}</strong>
+          </button>
+        </form>
+
+        <div ng-show="uploadSuccess !== null" class="alert" ng-class="uploadSuccess ? 'alert-success' : 'alert-danger'">
+          {{ uploadSuccess ? 'Video uploaded successfully!' : 'Something went wrong!' }}
+        </div>
+
+        <uib-progressbar class="progress-striped active" value="progress" type="info" ng-show="isUploading">
+          {{ progress + '%' }}
+        </uib-progressbar>
+
+        <table class="table table-striped">
+          <tbody>
+          <tr ng-repeat="media in project.medias" ng-show="media.type === 'Video'">
+            <td>{{media.name}}</td>
+            <td>{{media.status}}</td>
+            <td>
+              <img ng-src="{{media.thumbnail.url}}" alt="{{media.name}}" />
+            </td>
+          </tr>
+          <tr ng-show="project === undefined">
+            <td>
+              Loading Wistia Project ...
+            </td>
+          </tr>
+          <tr ng-show="project !== undefined && project.medias.length === 0">
+            <td>
+              No videos uploaded yet!
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-
-    <button class="btn btn-success" type="submit" ng-click="upload()" ng-disabled="!file || !form.file.$valid">
-      Upload <strong>{{file.name}}</strong>
-    </button>
-  </form>
-
-  <!--<form id="fileupload" action="https://upload.wistia.com/" method="POST" enctype="multipart/form-data" data-file-upload="fileUploadOptions" data-ng-class="{'fileupload-processing': processing()}">-->
-
-    <!--&lt;!&ndash; Wistia auth and config &ndash;&gt;-->
-    <!--<input type="hidden" name="api_password" value="5f4ad4c906859770085fc09a0967971f28095f18beaf89b8fef9bfd1267d8969" />-->
-    <!--<input type="hidden" name="project_id" value="6m0qim6o9j" />-->
-
-    <!--&lt;!&ndash; Upload buttons &ndash;&gt;-->
-    <!--<div class="row fileupload-buttonbar">-->
-      <!--<div class="col-lg-7">-->
-        <!--&lt;!&ndash; Add files btn &ndash;&gt;-->
-        <!--<span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}">-->
-          <!--<i class="glyphicon glyphicon-plus"></i>-->
-          <!--<span>Add files...</span>-->
-          <!--<input type="file" name="files[]" multiple ng-disabled="disabled" ng-file-select="onFileSelect($files)" />-->
-        <!--</span>-->
-
-        <!--&lt;!&ndash; Start btn &ndash;&gt;-->
-        <!--<button type="button" class="btn btn-primary start" data-ng-click="submit()">-->
-          <!--<i class="glyphicon glyphicon-upload"></i>-->
-          <!--<span>Start upload</span>-->
-        <!--</button>-->
-      <!--</div>-->
-
-      <!--&lt;!&ndash; The global progress state &ndash;&gt;-->
-      <!--<div class="col-lg-5 fade" data-ng-class="{in: active()}">-->
-        <!--&lt;!&ndash; The global progress bar &ndash;&gt;-->
-        <!--<div class="progress progress-striped active" data-file-upload-progress="progress()">-->
-          <!--<div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div>-->
-        <!--</div>-->
-        <!--&lt;!&ndash; The extended global progress state &ndash;&gt;-->
-        <!--<div class="progress-extended">&nbsp;</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</form>-->
-  <table>
-    <tbody>
-      <tr ng-repeat="media in project.medias" ng-show="media.type === 'Video'">
-        <td>{{media.name}}</td>
-        <td>{{media.status}}</td>
-        <td>
-          <img ng-src="{{media.thumbnail.url}}" alt="{{media.name}}" />
-        </td>
-      </tr>
-      <tr ng-show="project === undefined">
-        <td>
-          Loading ...
-        </td>
-      </tr>
-      <tr ng-show="project !== undefined && project.medias.length === 0">
-        <td>
-          No videos uploaded yet!
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  </div>
 </div>
