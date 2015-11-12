@@ -6,6 +6,7 @@
       'ui.router',
       'ui.bootstrap',
       'restangular',
-      'ngFileUpload'
+      'ngFileUpload',
+      'yaru22.angular-timeago'
     ]);
 })();

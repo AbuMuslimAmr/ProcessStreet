@@ -10,8 +10,15 @@
           .get();
       }
 
+      function getVideo(id) {
+        return Restangular
+          .one('medias', id)
+          .get();
+      }
+
       return {
-        getProject: getProject
+        getProject: getProject,
+        getVideo: getVideo
       }
     });
 })();

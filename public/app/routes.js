@@ -11,6 +11,10 @@
         .state('upload', {
           url: '/upload',
           templateUrl: 'app/states/upload/upload.html'
+        })
+        .state('play', {
+          url: '/play/:id',
+          templateUrl: 'app/states/play/play.html'
         });
     });
 })();

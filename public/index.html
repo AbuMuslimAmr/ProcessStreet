@@ -8,11 +8,23 @@
     <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="components/angular-bootstrap/ui-bootstrap-csp.css" />
 
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="components/font-awesome/css/font-awesome.min.css" />
+
     <!-- app styles -->
     <link rel="stylesheet" href="styles/css/main.css" />
   </head>
   <body>
-    <div ui-view></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12 col-lg-offset-3 col-md-offset-2 col-sm-offset-1">
+          <div ui-view></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wistia player -->
+    <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js"></script>
 
     <!-- JQuery -->
     <script src="components/jquery/dist/jquery.min.js" type="text/javascript"></script>
@@ -24,6 +36,9 @@
     <!-- Angular -->
     <script src="components/angular/angular.min.js" type="text/javascript"></script>
     <script src="components/ui-router/release/angular-ui-router.min.js" type="text/javascript"></script>
+
+    <!-- Timeago filter -->
+    <script src="components/angular-timeago/dist/angular-timeago.min.js" type="text/javascript"></script>
 
     <!-- Angular BS -->
     <script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
@@ -47,5 +62,6 @@
 
     <!-- app/controllers -->
     <script src="app/states/upload/upload-ctrl.js" type="text/javascript"></script>
+    <script src="app/states/play/play-ctrl.js" type="text/javascript"></script>
   </body>
 </html>
