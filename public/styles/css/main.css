@@ -9,7 +9,9 @@ form.upload {
   margin-bottom: 15px;
 }
 form.upload .btn {
-  margin-bottom: 5px;
+  float: left;
+  margin-right: 5px;
+  margin-bottom: 15px;
 }
 .play-btn {
   font-size: 40px;
@@ -20,6 +22,7 @@ form.upload .btn {
   white-space: nowrap;
   display: block;
   text-overflow: ellipsis;
+  float: left;
 }
 td.media-thumbnail {
   width: 100px;
