@@ -8,6 +8,9 @@ body {
 form.upload {
   margin-bottom: 15px;
 }
+form.upload .btn {
+  margin-bottom: 5px;
+}
 .play-btn {
   font-size: 40px;
 }
@@ -18,3 +21,4 @@ td.media-thumbnail {
   width: 100%;
   height: 300px;
 }
+
