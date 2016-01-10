@@ -3,7 +3,7 @@
 > Here's the [requirements](https://www.evernote.com/shard/s12/sh/d23cf93d-6602-40dc-8177-099487676390/7d698c1680e0a319)
 
 ## Demo
-- https://abumuslimamr.github.io/wistia-uploader/
+- https://amrabdulrahman.github.io/wistia-uploader
 
 ## Install
 ```bash
